@@ -1,0 +1,16 @@
+img#image {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+input#name.form-control.float-left {
+    border-right: none !important;
+    margin-right: -10px !important;
+    overflow: hidden !important;
+}
+button#saveBtn.btn.btn-primary.float-right {
+    border-radius: 0% 5% 5% 0% !important;
+}
