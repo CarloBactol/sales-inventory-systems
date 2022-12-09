@@ -4,8 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Order ') }}
-                    <a href="{{ url('/add-order') }}" class="float-right btn btn-sm btn-primary">Add New</a>
+                <div class="card-header">{{ __('Installment Transactions ') }}
                 </div>
 
                 <div class="card-body">
@@ -18,7 +17,6 @@
                                 <th>Quantity</th>
                                 <th>Total Pay</th>
                                 <th>Balance</th>
-                                <th>Penalty</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,7 +29,6 @@
                                 <td>{{ $item->quantity }}</td>
                                 <td>₱{{ $item->total_pay }}</td>
                                 <td>₱{{ $item->balance }}</td>
-                                <td>+{{ $item->penalty }}</td>
                                 <td>
                                     <a href="{{ url('update-balance/'. $item->id) }}" class="btn btn-primary btn-sm"><i
                                             class="fas fa-edit"></i></a>

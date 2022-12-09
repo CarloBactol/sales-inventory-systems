@@ -87,7 +87,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="payment_mode" class="col-md-4 col-form-label text-md-right">{{ __('Payement
+                            <label for="payment_mode" class="col-md-4 col-form-label text-md-right">{{ __('Payment
                                 mode')
                                 }}</label>
 

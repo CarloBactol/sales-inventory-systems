@@ -4,8 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Order ') }}
-                    <a href="{{ url('/add-order') }}" class="float-right btn btn-sm btn-primary">Add New</a>
+                <div class="card-header">{{ __('Cash Orders ') }}
                 </div>
 
                 <div class="card-body">

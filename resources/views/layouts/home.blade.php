@@ -74,10 +74,10 @@
                     @else
                     @if (Auth::check())
                     @if (Auth::user()->role_as == '1')
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 text-dark px-0 px-lg-3 rounded"
                             href=" {{url('/dashboard') }}">Dashboard</a></li>
                     @else
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link text-dark py-3 px-0 px-lg-3 rounded"
                             href=" {{url('/cashier') }}">Cashier</a></li>
                     @endif
 

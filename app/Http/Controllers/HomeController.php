@@ -30,16 +30,23 @@ class HomeController extends Controller
     public function index()
     {
 
-        $yearly_income = DB::table('orders')
+        $yearly_income_cash = DB::table('orders')
             ->whereYear('created_at', Carbon::now()->format('Y'))
             ->where('status', '1')
+            ->where('payment_mode', 'cash')
+            ->sum('price');
+
+        $yearly_income_installment = DB::table('orders')
+            ->whereYear('created_at', Carbon::now()->format('Y'))
+            ->where('status', '1')
+            ->where('payment_mode', 'installment')
             ->sum('price');
 
         $pending_orders = Order::where('status', '0')->count();
         $paid_cash = Order::where('status', '1')->where('payment_mode', 'cash')->count();
         $paid_installment = Installment::where('balance', 0)->count();
         $users = Customer::count();
-        return view('dashboard', compact('pending_orders', 'paid_cash', 'paid_installment', 'users', 'yearly_income'));
+        return view('dashboard', compact('pending_orders', 'paid_cash', 'paid_installment', 'users', 'yearly_income_cash', 'yearly_income_installment'));
     }
 
     public function orderChart(Request $request)
@@ -52,6 +59,7 @@ class HomeController extends Controller
         )
             ->groupBy('month')
             ->orderBy('month')
+            ->where('status', '1')
             ->get();
 
         $labels = [
@@ -61,7 +69,7 @@ class HomeController extends Controller
         $total = $count = [];
 
         foreach ($entries as $entry) {
-            $total[$entry->month] = $entry->total_price;
+            $total[$entry->month] = $entry->price;
             $count[$entry->month] = $entry->count;
         }
 
@@ -86,7 +94,7 @@ class HomeController extends Controller
                     'data' => array_values($total),
                 ],
                 [
-                    'label' => 'Order #',
+                    'label' => 'Paid Orders #',
                     'data' => array_values($count),
                 ],
 
