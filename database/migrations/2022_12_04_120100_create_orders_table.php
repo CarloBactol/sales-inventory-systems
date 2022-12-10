@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->decimal("penalty")->nullable();
             $table->string("due_date")->nullable();
             $table->decimal("discount")->nullable();
+            $table->string("num_month")->nullable();
             $table->string("status")->default(0);
             $table->timestamps();
         });

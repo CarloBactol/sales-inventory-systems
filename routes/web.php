@@ -90,6 +90,8 @@ Route::middleware('isCashier')->group(function () {
     Route::get('/update-balance/{id}', [InstallmentController::class, 'update_balance']);
     Route::put('/update-payment-balance/{id}', [InstallmentController::class, 'update_payment_balance']);
     Route::get('/paid-installment', [InstallmentController::class, 'paid_installment']);
+    Route::get('/historty-payment', [InstallmentController::class, 'historty_payment']);
+
     //transaction
     Route::get('/cash-transaction', [CashPaymentController::class, 'transaction']);
 

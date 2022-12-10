@@ -41,7 +41,7 @@
                             <div class="col-md-6">
                                 <input id="product_id" type="text"
                                     class="form-control @error('product_id') is-invalid @enderror" name="product_id"
-                                    value="{{ $product->product_name }}">
+                                    value="{{ $product->product_id }}">
 
                                 @error('product_id')
                                 <span class="invalid-feedback" role="alert">

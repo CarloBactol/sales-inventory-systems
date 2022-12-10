@@ -1,7 +1,9 @@
 @extends('layouts.cashier')
 @section('content')
+
 @php
 $value = "";
+
 @endphp
 <div class="container">
     <div class="row justify-content-center">
@@ -32,21 +34,14 @@ $value = "";
 
                         <div class="row mb-3">
                             <label for="customer_order" class="col-md-4 col-form-label text-md-right">{{
-                                __('Order ID')
+                                __('Order Product ID')
                                 }}</label>
 
                             <div class="col-md-6">
 
-                                {{-- @foreach ( $product as $item )
-
-                                @if ($item->product_id == $order->customer_order)
-                                <input type="hidden" value="{{ $item->product_name }}">
-                                @endif
-                                @endforeach --}}
-
                                 <input id="customer_order" type="text"
                                     class="form-control @error('customer_order') is-invalid @enderror"
-                                    name="customer_order" value=" {{ $order->customer_order }}" autofocus>
+                                    name="customer_order" value="{{ $order->customer_order }}" autofocus>
                             </div>
                         </div>
                         @php
@@ -56,8 +51,8 @@ $value = "";
                         $discount_value = ($old_price / 100) * $percent;
 
                         $new_price = $old_price - $discount_value;
-
                         @endphp
+
                         <div class="row mb-3">
                             <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price | ₱')
                                 }}</label>
@@ -76,6 +71,34 @@ $value = "";
                                 <input id="quantity" type="text"
                                     class="form-control @error('quantity') is-invalid @enderror"
                                     value="{{ $order->quantity }}" autofocus name="quantity">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="total_month" class="col-md-4 col-form-label text-md-right">{{ __('Total
+                                Month(s)')
+                                }}</label>
+
+                            <div class="col-md-6">
+                                <input id="total_month" type="text"
+                                    class="form-control @error('total_month') is-invalid @enderror"
+                                    value="{{ $order->num_month }}" autofocus name="total_month">
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="penalty" class="col-md-4 col-form-label text-md-right">{{ __('Penalty | ₱')
+                                }}</label>
+                            <div class="col-md-6">
+                                <input id="penalty" type="text"
+                                    class="form-control @error('penalty') is-invalid @enderror" autofocus name="penalty"
+                                    value={{ $order->penalty }}>
+                                @error('penalty')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -99,12 +122,13 @@ $value = "";
                         </div>
 
                         <div class="row mb-3">
+                            <input type="hidden" name="balance" id="balance_hidden">
                             <label for="balance" class="col-md-4 col-form-label text-md-right">{{ __('Balance | ₱')
                                 }}</label>
                             <div class="col-md-6">
                                 <input id="balance" type="text"
                                     class="form-control @error('balance') is-invalid @enderror" autofocus
-                                    name="balance">
+                                    name="balance_old">
                                 @error('balance')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -114,6 +138,43 @@ $value = "";
                         </div>
 
                         <hr>
+
+                        <div class="row mb-3">
+
+                            <label for="due_date" class="col-md-4 col-form-label text-md-right">{{ __('Due Date')
+                                }}</label>
+                            <div class="col-md-6">
+                                <span class="text-muted text-sm">mm-dd-yyy</span>
+                                <input id="datepicker" type="text"
+                                    class="form-control @error('due_date') is-invalid @enderror" autofocus
+                                    name="due_date" value="{{ $order->due_date }}">
+                                @error('due_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        @php
+                        $breaks_pay = $total / $order->num_month
+                        @endphp
+                        <div class="row mb-3">
+                            <label for="break_pay" class="col-md-4 col-form-label text-md-right">{{ __('Breaks of Month
+                                to Pay | ₱')
+                                }}</label>
+                            <div class="col-md-6">
+                                <input id="break_pay" type="text"
+                                    class="form-control @error('break_pay') is-invalid @enderror" autofocus
+                                    name="break_pay" value="{{ number_format(floor($breaks_pay * 100)/100, 2) }}">
+                                @error('break_pay')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="cash_pay" class="col-md-4 col-form-label text-md-right">{{ __('Cash Pay | ₱')
                                 }}</label>
@@ -156,8 +217,9 @@ $value = "";
            var cash_pay = $('#cash_pay').val()
 
            var total_balance =    total - cash_pay
-
-           $('#balance').val(total_balance)
+            var  result = Math.round(total_balance * 100) / 100
+           $('#balance').val(result)
+           $('#balance_hidden').val(result)
 
             
          });

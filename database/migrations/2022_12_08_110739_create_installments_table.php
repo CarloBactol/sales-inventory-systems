@@ -21,7 +21,7 @@ class CreateInstallmentsTable extends Migration
             $table->integer('quantity');
             $table->decimal('total_pay');
             $table->decimal('cash_pay');
-            $table->decimal('balance');
+            $table->decimal('balance_old');
             $table->decimal('penalty')->default(0);
             $table->string('status')->default(0);
             $table->timestamps();

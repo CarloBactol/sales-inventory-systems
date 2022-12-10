@@ -21,6 +21,7 @@ class Order extends Model
         'due_date',
         'discount',
         'status',
+        'num_month',
         'id',
     ];
 

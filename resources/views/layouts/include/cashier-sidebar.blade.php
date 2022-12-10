@@ -79,6 +79,20 @@
         </div>
     </li>
 
+    <!-- Transaction History -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#his" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fa fa-history"></i>
+            <span>Installment History</span>
+        </a>
+        <div id="his" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">History Components:</h6>
+                <a class="collapse-item" href="{{ url('/historty-payment') }}">History Record</a>
+            </div>
+        </div>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 

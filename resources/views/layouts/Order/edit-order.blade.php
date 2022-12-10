@@ -41,23 +41,19 @@
                                 }}</label>
 
                             <div class="col-md-6">
+
+
+                                @foreach ($product as $p_item)
+                                @if ($p_item->product_id == $order->customer_order)
                                 <select name="customer_order" id="" class="form-control">
-                                    @foreach ($product as $p_item)
-                                    @if ($p_item->product_name == $order->customer_order)
-                                    <option selected value="{{ $p_item->id}}">{!!
-                                        Str::limit($order->customer_order,
-                                        15, "...") !!} | Price: {{
-                                        $order->price }}
+                                    <option selected value="{{ $p_item->product_id }}">{{ $p_item->product_name }}
                                     </option>
-                                    @elseif ($p_item->product_name != $order->customer_order)
-                                    <option value="{{ $p_item->product_id }}">{!!
-                                        Str::limit($p_item->product_name,
-                                        15, "...") !!} | Price: {{
-                                        $order->price }}</option>
-                                    @else
-                                    @endif
-                                    @endforeach
                                 </select>
+
+
+                                @endif
+                                @endforeach
+
                             </div>
                         </div>
 
@@ -144,6 +140,21 @@
                                     value="{{ $order->penalty }}">
 
                                 @error('penalty')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="num_month" class="col-md-4 col-form-label text-md-right">{{ __('Total Month(s)')
+                                }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control @error('num_month') is-invalid @enderror"
+                                    id='num_month' name="num_month" value="{{ $order->num_month }}">
+                                @error('num_month')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

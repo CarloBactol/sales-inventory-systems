@@ -44,7 +44,7 @@ class HomeController extends Controller
 
         $pending_orders = Order::where('status', '0')->count();
         $paid_cash = Order::where('status', '1')->where('payment_mode', 'cash')->count();
-        $paid_installment = Installment::where('balance', 0)->count();
+        $paid_installment = Installment::where('balance_old', 0)->count();
         $users = Customer::count();
         return view('dashboard', compact('pending_orders', 'paid_cash', 'paid_installment', 'users', 'yearly_income_cash', 'yearly_income_installment'));
     }

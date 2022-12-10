@@ -20,6 +20,7 @@
                                 <th>Payment Mode</th>
                                 <th>Discount</th>
                                 <th>Penalty</th>
+                                <th>Total Month</th>
                                 <th>Paid | Due Date</th>
                                 <th>Action</th>
                             </tr>
@@ -40,7 +41,11 @@
                                 <td>{{ $order_item->payment_mode }}</td>
                                 <td>{{ number_format($order_item->discount, 2) }}%</td>
                                 <td>+{{ $order_item->penalty }}</td>
+                                <td>{{ $order_item->num_month }} {{ $order_item->num_month == '1'? 'month' : 'months' }}
+                                </td>
                                 <td>{{ $order_item->due_date }}</td>
+
+
                                 <td>
                                     <div class="d-flex ">
                                         <a href="{{ url('edit-order/'. $order_item->id) }}"
